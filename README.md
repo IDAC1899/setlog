@@ -1,15 +1,14 @@
 # SetLog
 
-<!-- Screenshot goes here once the app is built. Requirement: screenshot or logo. -->
-<!-- ![SetLog](./public/images/screenshot.png) -->
+![SetLog](./public/images/setlog-lockup.svg)
 
 A workout logging app for people who lift. Log a training session, record the exercises you did with the sets, reps and weight for each, and look back at what you lifted last time so you know what to beat.
 
-I built this because I train on a Push/Pull/Legs split and kept losing track of my working weights across sessions — the difference between guessing and progressing is knowing what you did last week.
+I built this because I love training, and i always lose track of what i workout and when. so i thought this app could be a good excuse to create something to help me.
 
 ## Getting Started
 
-- **Deployed app:** _link goes here_
+- **Deployed app:** link goes here
 - **Planning materials:** user stories, ERD and route tables are below.
 
 ## Planning
@@ -43,46 +42,7 @@ I built this because I train on a Push/Pull/Legs split and kept losing track of 
 
 ### ERD
 
-```
-┌─────────────────┐
-│      User       │
-├─────────────────┤
-│ _id             │
-│ username        │
-│ password        │
-└────────┬────────┘
-         │ 1
-         │
-         │ n          (referenced — Workout.owner holds a User _id)
-┌────────┴────────┐
-│    Workout      │
-├─────────────────┤
-│ _id             │
-│ title           │
-│ date            │
-│ owner    ───────┼──> User._id
-│ sets[]   ───────┼──> embedded setSchema
-└────────┬────────┘
-         │ 1
-         │
-         │ n          (embedded — sets live inside the workout document)
-┌────────┴────────┐
-│      Set        │  (subdocument, no collection of its own)
-├─────────────────┤
-│ _id             │
-│ exercise ───────┼──> Exercise._id   (referenced)
-│ reps            │
-│ weight          │
-└─────────────────┘
-
-┌─────────────────┐
-│    Exercise     │  (shared library, not owned by any user)
-├─────────────────┤
-│ _id             │
-│ name            │
-│ muscleGroup     │
-└─────────────────┘
-```
+------------------------------------------
 
 **Relationships**
 
@@ -91,50 +51,6 @@ I built this because I train on a Push/Pull/Legs split and kept losing track of 
 | User → Workout      | one-to-many  | referenced | Workouts grow without limit; a user document shouldn't grow with them |
 | Workout → Set       | one-to-many  | embedded   | A set has no meaning outside its workout and is never queried alone   |
 | Set → Exercise      | many-to-one  | referenced | "Bench Press" is one shared record; renaming it updates every set     |
-
-### Routes
-
-**Pages**
-
-| Method | Path | CRUD | Route Name | Payload | Purpose                | Action                  |
-| ------ | ---- | ---- | ---------- | ------- | ---------------------- | ----------------------- |
-| GET    | `/`  | None | home       | No      | Landing page for guests | `res.render('index')` |
-
-**Auth** — mounted at `/auth`
-
-| Method | Path         | CRUD        | Route Name | Payload | Purpose                | Action                        |
-| ------ | ------------ | ----------- | ---------- | ------- | ---------------------- | ----------------------------- |
-| GET    | `/sign-up`   | None        | signup     | No      | Render sign up form    | `res.render('auth/sign-up')`  |
-| POST   | `/sign-up`   | Create user | register   | Yes     | Create the account     | `res.redirect('/workouts')`   |
-| GET    | `/sign-in`   | None        | signin     | No      | Render sign in form    | `res.render('auth/sign-in')`  |
-| POST   | `/sign-in`   | None        | login      | Yes     | Start the session      | `res.redirect('/workouts')`   |
-| GET    | `/sign-out`  | None        | signout    | No      | Destroy the session    | `res.redirect('/')`           |
-
-**Workouts** — mounted at `/workouts`, private
-
-| Method | Path                | CRUD               | Route Name | Payload | Purpose                          | Action                                |
-| ------ | ------------------- | ------------------ | ---------- | ------- | -------------------------------- | ------------------------------------- |
-| GET    | `/`                 | Read all workouts  | index      | No      | List the signed in user's workouts | `res.render('workouts/index')`      |
-| GET    | `/new`              | None               | new        | No      | Form to create a workout          | `res.render('workouts/new')`         |
-| POST   | `/`                 | Create a workout   | create     | Yes     | Save the new workout              | `res.redirect('/workouts/:id')`      |
-| GET    | `/:workoutId`       | Read one workout   | show       | No      | Show the workout and its sets     | `res.render('workouts/show')`        |
-| GET    | `/:workoutId/edit`  | None               | edit       | No      | Pre-filled form to edit           | `res.render('workouts/edit')`        |
-| PUT    | `/:workoutId`       | Update a workout   | update     | Yes     | Save the changes                  | `res.redirect('/workouts/:id')`      |
-| DELETE | `/:workoutId`       | Delete a workout   | delete     | No      | Remove the workout                | `res.redirect('/workouts')`          |
-
-**Sets** — mounted at `/workouts/:workoutId/sets`, private, `mergeParams: true`
-
-| Method | Path      | CRUD             | Route Name | Payload | Purpose                     | Action                           |
-| ------ | --------- | ---------------- | ---------- | ------- | --------------------------- | -------------------------------- |
-| POST   | `/`       | Create a set     | createSet  | Yes     | Add a set to the workout    | `res.redirect('/workouts/:id')` |
-| DELETE | `/:setId` | Delete a set     | deleteSet  | No      | Remove a set from a workout | `res.redirect('/workouts/:id')` |
-
-**Exercises** — mounted at `/exercises`, private
-
-| Method | Path | CRUD                | Route Name | Payload | Purpose                     | Action                          |
-| ------ | ---- | ------------------- | ---------- | ------- | --------------------------- | ------------------------------- |
-| GET    | `/`  | Read all exercises  | index      | No      | List the exercise library   | `res.render('exercises/index')` |
-| POST   | `/`  | Create an exercise  | create     | Yes     | Add a new exercise          | `res.redirect('/exercises')`    |
 
 ### Wireframes
 
