@@ -3,22 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
+    <link rel="icon" href="/images/setlog-icon.svg" />
+    <title>SetLog</title>
   </head>
   <body>
+    <%- include('./partials/_navbar.ejs') %>
 
     <% if(user){ %>
-      <h1>Welcome to the app, <%= user.username %>!</h1>
-      <p>
-        <a href="/auth/sign-out">Log out</a>
-        <a href="/protected">PROTECTED ROUTE EXAMPLE</a>
-      </p>
+      <h1>Welcome back, <%= user.username %>!</h1>
     <% }else{ %>
-      <h1>Welcome to the app!</h1>
-      <a href="/auth/sign-up">Register</a>
-      <a href="/auth/sign-in">Login</a>
+      <h1>Welcome to SetLog</h1>
+      <p>Log your lifts. Know what to beat.</p>
     <%}%>
-
 
   </body>
 </html>
