@@ -1,5 +1,7 @@
 /* eslint-disable prefer-destructuring */
 require('dotenv').config();
+require('./config/database');
+
 const express = require('express');
 
 const app = express();
@@ -19,13 +21,6 @@ const authCtrl = require('./controllers/authCtrl');
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
-
-// Mongo DB
-mongoose.connect(process.env.MONGODB_URI);
-
-mongoose.connection.on('connected', () => {
-  console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
-});
 
 // Middleware to parse URL-encoded data from forms
 app.use(express.urlencoded({ extended: false }));
