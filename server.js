@@ -6,8 +6,6 @@ const express = require('express');
 
 const app = express();
 
-const mongoose = require('mongoose');
-
 // Middleware
 const session = require('express-session');
 const MongoStore = require('connect-mongo').MongoStore;
