@@ -54,9 +54,7 @@ I built this because I love training, and i always lose track of what i workout 
 
 ### Wireframes
 
-<!-- Link the Figma / Excalidraw / photos of paper sketches here. -->
-
-_To do: landing, sign in, sign up, workouts index, workout show, workout new, workout edit, exercises index._
+![SetLog Wireframes](./public/images/setlog-wireframes.png)
 
 ## Technologies Used
 
