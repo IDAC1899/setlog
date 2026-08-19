@@ -15,8 +15,9 @@ const morgan = require('morgan');
 const isSignedIn = require('./middleware/isSignedIn');
 const addUserToViews = require('./middleware/addUserToViews');
 
-// CONTROLLERS
-const authCtrl = require('./controllers/authCtrl');
+// ROUTERS
+const authRouter = require('./routes/authRouter');
+const pagesRouter = require('./routes/pagesRouter');
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
@@ -39,23 +40,12 @@ app.use(
 );
 
 app.use(addUserToViews);
-
-// PUBLIC ROUTES
-app.get('/', async (req, res) => {
-  res.render('index.ejs');
-});
-
-app.get('/auth/sign-up', authCtrl.signup);
-app.post('/auth/sign-up', authCtrl.register);
-app.get('/auth/sign-in', authCtrl.signin);
-app.post('/auth/sign-in', authCtrl.login);
+// ROUTES
+app.use('', pagesRouter);
+app.use('/auth', authRouter);
 
 // Customer middleware
 app.use(isSignedIn);
-
-// PRIVATE ROUTES
-app.get('/auth/sign-out', authCtrl.signout);
-
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
 });
