@@ -2,6 +2,7 @@
 require('dotenv').config();
 require('./config/database');
 
+const path = require('path');
 const express = require('express');
 
 const app = express();
@@ -20,6 +21,8 @@ const authCtrl = require('./controllers/authCtrl');
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
 
+// Middleware to parse URL-encoded data from forms
+app.use(express.urlencoded({ extended: false }));
 // Middleware to parse URL-encoded data from forms
 app.use(express.urlencoded({ extended: false }));
 // Middleware for using HTTP verbs such as PUT or DELETE
@@ -52,10 +55,6 @@ app.use(isSignedIn);
 
 // PRIVATE ROUTES
 app.get('/auth/sign-out', authCtrl.signout);
-
-app.get('/protected', async (req, res) => {
-  res.send(`You are logged in as ${req.session.user.username}`);
-});
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
