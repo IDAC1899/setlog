@@ -18,6 +18,7 @@ const addUserToViews = require('./middleware/addUserToViews');
 // ROUTERS
 const authRouter = require('./routes/authRouter');
 const pagesRouter = require('./routes/pagesRouter');
+const exercisesRouter = require ('./routers/exercisesRouter');
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
@@ -46,6 +47,8 @@ app.use('/auth', authRouter);
 
 // Customer middleware
 app.use(isSignedIn);
+app.use('/exercises', exercisesRouter);
+
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
 });
