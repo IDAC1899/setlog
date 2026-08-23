@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Exercise = require('./exercise');
 
-const routineShcema = new mongoose.Schema({
+const routineSchema = new mongoose.Schema({
     exercise: {
-        type: mongoose.Shcema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         red: 'Exercise',
         required: true,
     },
@@ -32,7 +32,7 @@ const workoutSchema = new mongoose.Schema({
     },
 
     owner: {
-        type: mongoose.Shcema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
