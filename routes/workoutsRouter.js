@@ -8,5 +8,8 @@ router.get('/', workoutCtrl.index);
 router.get('/new', workoutCtrl.newWorkout);
 router.post('/', workoutCtrl.create);
 router.get('/:workoutId', workoutCtrl.show);
+router.get('/:workoutId/edit', workoutCtrl.edit);
+router.put('/:workoutId', workoutCtrl.update);
+router.delete('/:workoutId', workoutCtrl.deleteWorkout);
 
 module.exports = router;
