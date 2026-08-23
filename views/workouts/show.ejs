@@ -12,7 +12,14 @@
     <h1><%= workout.title %></h1>
     <p><%= workout.date.toDateString() %></p>
 
+        <a href="/workouts/<%= workout._id %>/edit">Edit</a>
+
+    <form action="/workouts/<%= workout._id %>?_method=DELETE" method="POST">
+      <button type="submit">Delete</button>
+    </form>
+
     <h2>Routines</h2>
+
 
     <% if(workout.routines.length){ %>
       <table>

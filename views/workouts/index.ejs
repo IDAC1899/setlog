@@ -20,6 +20,13 @@
             <a href="/workouts/<%= workout._id %>"><%= workout.title %></a>
             <p><%= workout.date.toDateString() %></p>
             <p><%= workout.routines.length %> routines logged</p>
+
+            <a href="/workouts/<%= workout._id %>/edit">Edit</a>
+
+            <form action="/workouts/<%= workout._id %>?_method=DELETE" method="POST">
+              <button type="submit">Delete</button>
+            </form>
+
           </li>
         <% }) %>
       </ul>
