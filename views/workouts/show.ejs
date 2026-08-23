@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/setlog-icon.svg" />
+    <title><%= workout.title %></title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1><%= workout.title %></h1>
+    <p><%= workout.date.toDateString() %></p>
+
+    <h2>Routines</h2>
+
+    <% if(workout.routines.length){ %>
+      <table>
+        <thead>
+          <tr>
+            <th>Exercise</th>
+            <th>Reps</th>
+            <th>Weight</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% workout.routines.forEach((routine) => { %>
+            <tr>
+              <td><%= routine.exercise.name %></td>
+              <td><%= routine.reps %></td>
+              <td><%= routine.weight %> kg</td>
+              <td>
+                <form action="/workouts/<%= workout._id %>/routines/<%= routine._id %>?_method=DELETE" method="POST">
+                  <button type="submit">Remove</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% }else{ %>
+      <p>No routines logged yet.</p>
+    <%}%>
+
+    <h2>Add a Routine</h2>
+
+    <% if(exercises.length){ %>
+      <form action="/workouts/<%= workout._id %>/routines" method="POST">
+        <label for="exercise">Exercise:</label>
+        <select name="exercise" id="exercise" required>
+          <% exercises.forEach((exercise) => { %>
+            <option value="<%= exercise._id %>"><%= exercise.name %></option>
+          <% }) %>
+        </select>
+
+        <label for="reps">Reps:</label>
+        <input type="number" name="reps" id="reps" min="1" required />
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" name="weight" id="weight" min="0" step="0.5" required />
+
+        <button type="submit">Add Routine</button>
+      </form>
+    <% }else{ %>
+      <p>You have no exercises yet. <a href="/exercises">Add some first.</a></p>
+    <%}%>
+
+    <a href="/workouts">Back to my workouts</a>
+  </body>
+</html>

@@ -32,15 +32,12 @@ const create = async (req, res) => {
 
 const show = async (req, res) => {
   try {
-    // populate swaps the exercise ids for the real documents
     const workout = await Workout.findById(req.params.workoutId).populate('routines.exercise');
 
-    // don't let anyone open a workout they don't own
     if (!workout.owner.equals(req.session.user._id)) {
       return res.redirect('/workouts');
     }
 
-    // for the add-routine dropdown
     const exercises = await Exercise.find({ owner: req.session.user._id });
 
     res.render('workouts/show.ejs', {
