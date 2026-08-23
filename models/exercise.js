@@ -1,4 +1,4 @@
-const mongoose = required('mongoose');
+const mongoose = require('mongoose');
 
 const execersizeShcema = new mongoose.Schema({
     name: {
@@ -11,7 +11,7 @@ const execersizeShcema = new mongoose.Schema({
     },
 
     owner: {
-        type: mongoose.Shcema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },

@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const exerciseCtrl = required('../controllers/exerciseCtrl');
+const exerciseCtrl = require('../controllers/exerciseCtrl');
 
 router.get('/', exerciseCtrl.index);
 router.get('/', exerciseCtrl.create);

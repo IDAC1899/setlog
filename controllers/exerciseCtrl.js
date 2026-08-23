@@ -1,8 +1,8 @@
-const Exercise = required('../models/exercise');
+const Exercise = require('../models/exercise');
 
 const index = async (req, res) => {
     try {
-        const exercises = await Exercises.find({ owner: req.session.user._id});
+        const exercises = await Exercise.find({ owner: req.session.user._id});
 
         res.render('exercises/index.ejs', {
             exercises: exercises,
@@ -18,7 +18,7 @@ const create = async (req, res) => {
         req.body.owner = req.session.user._id;
         await Exercise.create(req.body);
 
-        res.redirect('/exercise');
+        res.redirect('/exercises');
     } catch (err) {
         console.log(err);
         res.redirect('/');
@@ -30,7 +30,7 @@ const deleteExercise = async (req, res) => {
         const exercise = await Exercise.findById(req.params.exerciseId);
 
         if (!exercise.owner.equals(req.session.user._id)) {
-            returns res.redirect('/exercises');
+            return res.redirect('/exercises');
         }
         await exercise.deleteOne();
 

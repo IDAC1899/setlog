@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/setlog-icon.svg" />
+    <title>Exercises</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1>Exercises</h1>
+
+    <form action="/exercises" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required />
+
+      <label for="muscleGroup">Muscle group:</label>
+      <input type="text" name="muscleGroup" id="muscleGroup" />
+
+      <button type="submit">Add Exercise</button>
+    </form>
+
+    <% if(exercises.length){ %>
+      <ul>
+        <% exercises.forEach((exercise) => { %>
+          <li>
+            <%= exercise.name %>
+            <% if(exercise.muscleGroup){ %>
+              &mdash; <%= exercise.muscleGroup %>
+            <%}%>
+
+            <form action="/exercises/<%= exercise._id %>?_method=DELETE" method="POST">
+              <button type="submit">Delete</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+    <% }else{ %>
+      <p>No exercises yet. Add your first one above.</p>
+    <%}%>
+
+  </body>
+</html>

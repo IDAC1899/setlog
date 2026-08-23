@@ -18,7 +18,7 @@ const addUserToViews = require('./middleware/addUserToViews');
 // ROUTERS
 const authRouter = require('./routes/authRouter');
 const pagesRouter = require('./routes/pagesRouter');
-const exercisesRouter = require ('./routers/exercisesRouter');
+const exercisesRouter = require ('./routes/exercisesRouter');
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
