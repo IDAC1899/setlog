@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/setlog-icon.svg" />
+    <title>Edit Workout</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1>Edit Workout</h1>
+
+    <form action="/workouts/<%= workout._id %>?_method=PUT" method="POST">
+      <label for="title">Title:</label>
+      <input type="text" name="title" id="title" value="<%= workout.title %>" required />
+
+      <label for="date">Date:</label>
+      <input type="date" name="date" id="date" value="<%= workout.date.toISOString().slice(0, 10) %>" required />
+
+      <button type="submit">Save Changes</button>
+    </form>
+
+    <a href="/workouts/<%= workout._id %>">Cancel</a>
+  </body>
+</html>
