@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/setlog-icon.svg" />
+    <title>My Workouts</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1>My Workouts</h1>
+
+    <a href="/workouts/new">+ New Workout</a>
+
+    <% if(workouts.length){ %>
+      <ul>
+        <% workouts.forEach((workout) => { %>
+          <li>
+            <a href="/workouts/<%= workout._id %>"><%= workout.title %></a>
+            <p><%= workout.date.toDateString() %></p>
+            <p><%= workout.routines.length %> routines logged</p>
+          </li>
+        <% }) %>
+      </ul>
+    <% }else{ %>
+      <p>No workouts yet. Log your first session above.</p>
+    <%}%>
+
+  </body>
+</html>
