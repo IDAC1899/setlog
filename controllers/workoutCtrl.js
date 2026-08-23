@@ -38,7 +38,61 @@ const show = async (req, res) => {
       return res.redirect('/workouts');
     }
 
-    const exercises = await Exercise.find({ owner: req.session.user._id });
+    const edit = async (req, res) => {
+  try {
+    const workout = await Workout.findById(req.params.workoutId);
+
+    if (!workout.owner.equals(req.session.user._id)) {
+      return res.redirect('/workouts');
+    }
+
+    res.render('workouts/edit.ejs', {
+      workout: workout,
+    });
+  } catch (err) {
+    console.log(err);
+    res.redirect('/workouts');
+  }
+};
+
+const update = async (req, res) => {
+  try {
+    const workout = await Workout.findById(req.params.workoutId);
+
+    if (!workout.owner.equals(req.session.user._id)) {
+      return res.redirect('/workouts');
+    }
+
+    // only the title and date are editable, routines are handled separately
+    workout.title = req.body.title;
+    workout.date = req.body.date;
+    await workout.save();
+
+    res.redirect(`/workouts/${workout._id}`);
+  } catch (err) {
+    console.log(err);
+    res.redirect('/workouts');
+  }
+};
+
+const deleteWorkout = async (req, res) => {
+  try {
+    const workout = await Workout.findById(req.params.workoutId);
+
+    if (!workout.owner.equals(req.session.user._id)) {
+      return res.redirect('/workouts');
+    }
+
+    await workout.deleteOne();
+
+    res.redirect('/workouts');
+  } catch (err) {
+    console.log(err);
+    res.redirect('/workouts');
+  }
+};
+
+const exercises = await Exercise.find({ owner: req.session.user._id });
 
     res.render('workouts/show.ejs', {
       workout: workout,
@@ -55,4 +109,7 @@ module.exports = {
   newWorkout,
   create,
   show,
+  edit,
+  update,
+  deleteWorkout,
 };
