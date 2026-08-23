@@ -42,6 +42,8 @@ I built this because I love training, and i always lose track of what i workout 
 
 ### ERD
 
+![SetLog ERD](./public/images/SetLog-erd.drawio.png)
+
 ------------------------------------------
 
 **Relationships**
@@ -65,10 +67,11 @@ I built this because I love training, and i always lose track of what i workout 
 - express-session with connect-mongo
 - bcrypt
 - CSS (Flexbox and Grid)
+- chatgpt (logo)
 
 ## Attributions
 
-_Fill in if any external assets or libraries needing attribution are used. Remove this section if not._
+_Fill in if any external assets or libraries needing attribution are used._
 
 ## Next Steps
 
