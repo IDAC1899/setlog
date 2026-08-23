@@ -20,6 +20,7 @@ const authRouter = require('./routes/authRouter');
 const pagesRouter = require('./routes/pagesRouter');
 const exercisesRouter = require ('./routes/exercisesRouter');
 const workoutsRouter = require ('./routes/workoutsRouter');
+const routinesRouter = require('./routes/routinesRouter');
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
@@ -47,6 +48,7 @@ app.use('', pagesRouter);
 app.use('/auth', authRouter);
 app.use('/exercises', exercisesRouter);
 app.use('/workouts', workoutsRouter);
+app.use('/workouts/:workoutId/routines', routinesRouter);
 
 // Customer middleware
 app.use(isSignedIn);
