@@ -27,10 +27,13 @@ const port = process.env.PORT ? process.env.PORT : '3000';
 
 // MIDDLEWARE
 app.use(express.static(path.join(__dirname, 'public')));
+
 // Middleware to parse URL-encoded data from forms
 app.use(express.urlencoded({ extended: false }));
+
 // Middleware for using HTTP verbs such as PUT or DELETE
 app.use(methodOverride('_method'));
+
 // Morgan for logging HTTP requests
 app.use(morgan('dev'));
 app.use(
@@ -43,6 +46,7 @@ app.use(
 );
 
 app.use(addUserToViews);
+
 // ROUTES
 app.use('', pagesRouter);
 app.use('/auth', authRouter);
@@ -52,7 +56,6 @@ app.use('/workouts/:workoutId/routines', routinesRouter);
 
 // Customer middleware
 app.use(isSignedIn);
-app.use('/exercises', exercisesRouter);
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

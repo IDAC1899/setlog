@@ -38,7 +38,19 @@ const show = async (req, res) => {
       return res.redirect('/workouts');
     }
 
-    const edit = async (req, res) => {
+    const exercises = await Exercise.find({ owner: req.session.user._id });
+
+    res.render('workouts/show.ejs', {
+      workout: workout,
+      exercises: exercises,
+    });
+  } catch (err) {
+    console.log(err);
+    res.redirect('/workouts');
+  }
+};
+
+const edit = async (req, res) => {
   try {
     const workout = await Workout.findById(req.params.workoutId);
 
@@ -63,7 +75,6 @@ const update = async (req, res) => {
       return res.redirect('/workouts');
     }
 
-    // only the title and date are editable, routines are handled separately
     workout.title = req.body.title;
     workout.date = req.body.date;
     await workout.save();
@@ -86,18 +97,6 @@ const deleteWorkout = async (req, res) => {
     await workout.deleteOne();
 
     res.redirect('/workouts');
-  } catch (err) {
-    console.log(err);
-    res.redirect('/workouts');
-  }
-};
-
-const exercises = await Exercise.find({ owner: req.session.user._id });
-
-    res.render('workouts/show.ejs', {
-      workout: workout,
-      exercises: exercises,
-    });
   } catch (err) {
     console.log(err);
     res.redirect('/workouts');
