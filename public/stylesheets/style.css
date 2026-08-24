@@ -1,0 +1,58 @@
+:root {
+  --bg: #0a0a0a;
+  --surface: #17171a;
+  --border: #2a2a2e;
+  --text: #f5f3ff;
+  --text-muted: #9a9aa2;
+  --purple: #a78bfa;
+  --purple-deep: #7c3aed;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: var(--purple);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--text);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+nav img {
+  display: block;
+}
+
+nav .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+nav .nav-links a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+nav .nav-links a:hover {
+  color: var(--purple);
+}
