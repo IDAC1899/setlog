@@ -56,3 +56,27 @@ nav .nav-links a {
 nav .nav-links a:hover {
   color: var(--purple);
 }
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+h1 {
+  font-size: 28px;
+  margin: 0 0 4px;
+}
+
+h2 {
+  font-size: 18px;
+  color: var(--text-muted);
+  margin: 32px 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+p {
+  color: var(--text-muted);
+  line-height: 1.5;
+}
