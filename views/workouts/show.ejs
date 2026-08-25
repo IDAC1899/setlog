@@ -27,6 +27,7 @@
         <thead>
           <tr>
             <th>Exercise</th>
+            <th>Sets</th>
             <th>Reps</th>
             <th>Weight</th>
             <th></th>
@@ -36,6 +37,7 @@
           <% workout.routines.forEach((routine) => { %>
             <tr>
               <td><%= routine.exercise.name %></td>
+              <td><%= routine.sets %></td>
               <td><%= routine.reps %></td>
               <td><%= routine.weight %> kg</td>
               <td>
@@ -64,6 +66,9 @@
 
         <label for="reps">Reps:</label>
         <input type="number" name="reps" id="reps" min="1" required />
+
+        <label for="sets">Sets:</label>
+        <input type="number" name="sets" id="sets" min="1" required />
 
         <label for="weight">Weight (kg):</label>
         <input type="number" name="weight" id="weight" min="0" step="0.5" required />

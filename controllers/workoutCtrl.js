@@ -3,7 +3,9 @@ const Exercise = require('../models/exercise');
 
 const index = async (req, res) => {
   try {
-    const workouts = await Workout.find({ owner: req.session.user._id }).sort({ date: -1 });
+    const workouts = await Workout.find({ owner: req.session.user._id })
+      .sort({ date: -1 })
+      .populate('routines.exercise');
 
     res.render('workouts/index.ejs', {
       workouts: workouts,
