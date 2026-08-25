@@ -8,6 +8,11 @@ const routineSchema = new mongoose.Schema({
         required: true,
     },
 
+    sets: {
+        type: Number,
+        required: true,
+    },
+
     reps: {
         type: Number,
         required: true,
