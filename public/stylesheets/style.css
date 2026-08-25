@@ -80,3 +80,49 @@ p {
   color: var(--text-muted);
   line-height: 1.5;
 }
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--purple);
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+button {
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 1px solid var(--purple);
+  background: var(--purple);
+  color: #0a0a0a;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+button:hover {
+  background: var(--purple-deep);
+  border-color: var(--purple-deep);
+  color: var(--text);
+}
