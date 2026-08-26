@@ -35,24 +35,22 @@ I built this because I love training, and i always lose track of what i workout 
 - AAU, I want to see a list of all available exercises so I can pick from them when logging.
 - AAU, I want to add a new exercise to the list when the one I did isn't there yet.
 
-**Sets**
+**Routines**
 
-- AAU, I want to add a set to a workout by choosing an exercise and entering reps and weight.
-- AAU, I want to remove a set from a workout if I logged it wrong.
+- AAU, I want to add a routine to a workout by choosing an exercise and entering sets, reps and weight.
+- AAU, I want to remove a routine from a workout if I logged it wrong.
 
 ### ERD
 
 ![SetLog ERD](./public/images/SetLog-erd.drawio.png)
-
-------------------------------------------
 
 **Relationships**
 
 | Relationship        | Cardinality  | Approach   | Why                                                                 |
 | ------------------- | ------------ | ---------- | ------------------------------------------------------------------- |
 | User → Workout      | one-to-many  | referenced | Workouts grow without limit; a user document shouldn't grow with them |
-| Workout → Set       | one-to-many  | embedded   | A set has no meaning outside its workout and is never queried alone   |
-| Set → Exercise      | many-to-one  | referenced | "Bench Press" is one shared record; renaming it updates every set     |
+| Workout → Routine   | one-to-many  | embedded   | A routine has no meaning outside its workout and is never queried alone |
+| Routine → Exercise  | many-to-one  | referenced | "Bench Press" is one shared record; renaming it updates every routine   |
 
 ### Wireframes
 
@@ -67,11 +65,11 @@ I built this because I love training, and i always lose track of what i workout 
 - express-session with connect-mongo
 - bcrypt
 - CSS (Flexbox and Grid)
-- chatgpt (logo)
 
 ## Attributions
 
-_Fill in if any external assets or libraries needing attribution are used._
+- Logo mark (SVG) generated with AI (Claude).
+- Built on top of the [MEN Stack Session Auth Template](https://github.com/Bahrain-SEB-15/SOLUTION-SESSION-AUTH-TEMPLATE) provided in class.
 
 ## Next Steps
 
