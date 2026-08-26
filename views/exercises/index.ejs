@@ -22,24 +22,26 @@
       <button type="submit">Add Exercise</button>
     </form>
 
-    <% if(exercises.length){ %>
-      <ul>
-        <% exercises.forEach((exercise) => { %>
-          <li>
-            <%= exercise.name %>
-            <% if(exercise.muscleGroup){ %>
-              &mdash; <%= exercise.muscleGroup %>
-            <%}%>
+          <% if(exercises.length){ %>
+        <div class="exercise-list">
+          <% exercises.forEach((exercise) => { %>
+            <div class="exercise-row">
+              <div>
+                <span class="name"><%= exercise.name %></span>
+                <% if(exercise.muscleGroup){ %>
+                  <span class="tag"><%= exercise.muscleGroup %></span>
+                <%}%>
+              </div>
 
-            <form action="/exercises/<%= exercise._id %>?_method=DELETE" method="POST">
-              <button type="submit">Delete</button>
-            </form>
-          </li>
-        <% }) %>
-      </ul>
-    <% }else{ %>
-      <p>No exercises yet. Add your first one above.</p>
-    <%}%>
+              <form action="/exercises/<%= exercise._id %>?_method=DELETE" method="POST">
+                <button type="submit" class="btn-danger">Delete</button>
+              </form>
+            </div>
+          <% }) %>
+        </div>
+      <% }else{ %>
+        <p>No exercises yet. Add your first one above.</p>
+      <%}%>
 
   </body>
 </html>
