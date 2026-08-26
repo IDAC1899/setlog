@@ -89,8 +89,21 @@
             <button type="submit">Add Routine</button>
           </form>
         </div>
+          
       <% }else{ %>
-        <p>You have no exercises yet. <a href="/exercises">Add some first.</a></p>
+        <p>You have no exercises yet. Add one below, or <a href="/exercises">manage your full list</a>.</p>
+
+        <div class="form-card">
+          <form action="/exercises" method="POST">
+            <label for="quickName">Exercise name:</label>
+            <input type="text" name="name" id="quickName" required />
+
+            <label for="quickMuscleGroup">Muscle group:</label>
+            <input type="text" name="muscleGroup" id="quickMuscleGroup" />
+
+            <button type="submit">Add Exercise</button>
+          </form>
+        </div>
       <%}%>
 
       <p class="form-footer"><a href="/workouts">Back to my workouts</a></p>
