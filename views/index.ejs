@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/images/setlog-icon.svg" />
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <title>SetLog</title>
-  </head>
-  <body>
-    <%- include('./partials/_navbar.ejs') %>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/images/setlog-icon.svg" />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <title>SetLog</title>
+</head>
+
+<body>
+  <%- include('./partials/_navbar.ejs') %>
 
     <main>
       <% if(user){ %>
         <h1>Welcome back, <%= user.username %>!</h1>
-        <p><%= workoutCount %> workout<%= workoutCount === 1 ? '' : 's' %> logged so far.</p>
+        <p>
+          <%= workoutCount %> workout<%= workoutCount===1 ? '' : 's' %> logged so far.
+        </p>
 
         <div class="card-actions">
           <a href="/workouts/new" class="btn-secondary">+ Log a Workout</a>
           <a href="/workouts" class="btn-secondary">View My Workouts</a>
         </div>
-      <% }else{ %>
-        <h1>Welcome to SetLog</h1>
-        <p>Log your lifts. Know what to beat.</p>
 
+        <h2>Or start from a template</h2>
         <div class="card-actions">
-          <a href="/auth/sign-up" class="btn-secondary">Sign Up</a>
-          <a href="/auth/sign-in" class="btn-secondary">Sign In</a>
+          <form action="/workouts/from-template" method="POST">
+            <input type="hidden" name="template" value="push" />
+            <button type="submit" class="btn-secondary">Push Day</button>
+          </form>
+          <form action="/workouts/from-template" method="POST">
+            <input type="hidden" name="template" value="pull" />
+            <button type="submit" class="btn-secondary">Pull Day</button>
+          </form>
+          <form action="/workouts/from-template" method="POST">
+            <input type="hidden" name="template" value="legs" />
+            <button type="submit" class="btn-secondary">Leg Day</button>
+          </form>
         </div>
-      <%}%>
+        <% }else{ %>
+          <h1>Welcome to SetLog</h1>
+          <p>Log your lifts. Know what to beat.</p>
+
+          <div class="card-actions">
+            <a href="/auth/sign-up" class="btn-secondary">Sign Up</a>
+            <a href="/auth/sign-in" class="btn-secondary">Sign In</a>
+          </div>
+          <%}%>
     </main>
     <script src="/scripts/loading.js"></script>
-  </body>
+</body>
+
 </html>
