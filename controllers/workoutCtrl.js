@@ -1,6 +1,21 @@
 const Workout = require('../models/workout');
 const Exercise = require('../models/exercise');
 
+const TEMPLATES = {
+  push: {
+    title: 'Push Day',
+    exercises: ['Bench Press', 'Overhead Press', 'Tricep Extension'],
+  },
+  pull: {
+    title: 'Pull Day',
+    exercises: ['Pull-Up', 'Bent-Over Row', 'Lat Pulldown', 'Bicep Curl'],
+  },
+  legs: {
+    title: 'Leg Day',
+    exercises: ['Squat', 'Romanian Deadlift', 'Lunge', 'Leg Press'],
+  },
+};
+
 const index = async (req, res) => {
   try {
     const workouts = await Workout.find({ owner: req.session.user._id })
@@ -123,6 +138,41 @@ const deleteWorkout = async (req, res) => {
   }
 };
 
+const createFromTemplate = async (req, res) => {
+  try {
+    const template = TEMPLATES[req.body.template];
+
+    if (!template) {
+      return res.redirect('/');
+    }
+
+    // match the template's exercise names to this user's own exercise ids
+    const exercises = await Exercise.find({
+      owner: req.session.user._id,
+      name: { $in: template.exercises },
+    });
+
+    const routines = exercises.map((exercise) => ({
+      exercise: exercise._id,
+      sets: 3,
+      reps: 10,
+      weight: 0,
+    }));
+
+    const workout = await Workout.create({
+      title: template.title,
+      date: new Date(),
+      owner: req.session.user._id,
+      routines: routines,
+    });
+
+    res.redirect(`/workouts/${workout._id}`);
+  } catch (err) {
+    console.log(err);
+    res.redirect('/');
+  }
+};
+
 module.exports = {
   index,
   newWorkout,
@@ -131,4 +181,5 @@ module.exports = {
   edit,
   update,
   deleteWorkout,
+  createFromTemplate,
 };
