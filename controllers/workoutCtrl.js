@@ -23,6 +23,14 @@ const newWorkout = async (req, res) => {
 const create = async (req, res) => {
   try {
     req.body.owner = req.session.user._id;
+
+     const MET = 5.5; // resistance training, moderate effort
+    if (req.body.weightKg && req.body.durationMinutes) {
+      req.body.caloriesBurned = Math.round(
+        MET * req.body.weightKg * (req.body.durationMinutes / 60)
+      );
+    }
+
     const workout = await Workout.create(req.body);
 
     res.redirect(`/workouts/${workout._id}`);
@@ -79,6 +87,16 @@ const update = async (req, res) => {
 
     workout.title = req.body.title;
     workout.date = req.body.date;
+    workout.weightKg = req.body.weightKg;
+    workout.durationMinutes = req.body.durationMinutes;
+
+    const MET = 5.5;
+    if (req.body.weightKg && req.body.durationMinutes) {
+      workout.caloriesBurned = Math.round(
+        MET * req.body.weightKg * (req.body.durationMinutes / 60)
+      );
+    }
+
     await workout.save();
 
     res.redirect(`/workouts/${workout._id}`);
