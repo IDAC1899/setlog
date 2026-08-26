@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
-const Exercise = require('./exercise');
 
 const routineSchema = new mongoose.Schema({
     exercise: {
         type: mongoose.Schema.Types.ObjectId,
-        red: 'Exercise',
+        ref: 'Exercise',
         required: true,
     },
 
@@ -40,6 +39,18 @@ const workoutSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
+    },
+
+    weightKg: {
+        type: Number,
+    },
+
+    durationMinutes: {
+        type: Number,
+    },
+
+    caloriesBurned: {
+        type: Number,
     },
 
     routines: [routineSchema],
