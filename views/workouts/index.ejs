@@ -1,39 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/images/setlog-icon.svg" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
     <title>My Workouts</title>
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
 
-    <h1>My Workouts</h1>
+    <main>
+      <h1>My Workouts</h1>
 
-    <a href="/workouts/new">+ New Workout</a>
+      <a href="/workouts/new">+ New Workout</a>
 
-    <% if(workouts.length){ %>
-      <ul>
-        <% workouts.forEach((workout) => { %>
-          <li>
-            <a href="/workouts/<%= workout._id %>"><%= workout.title %></a>
-            <p><%= workout.date.toDateString() %></p>
-            <p><%= workout.routines.length %> routines logged</p>
+      <% if(workouts.length){ %>
+        <ul>
+          <% workouts.forEach((workout) => { %>
+            <li class="card">
+              <a href="/workouts/<%= workout._id %>"><h3><%= workout.title %></h3></a>
+              <p class="meta"><%= workout.date.toDateString() %></p>
 
-            <a href="/workouts/<%= workout._id %>/edit">Edit</a>
+              <% if(workout.routines.length){ %>
+                <ul class="routine-preview">
+                  <% workout.routines.slice(0, 3).forEach((routine) => { %>
+                    <li><%= routine.exercise.name %> — <%= routine.sets %> sets × <%= routine.reps %> reps @ <%= routine.weight %>kg</li>
+                  <% }) %>
+                  <% if(workout.routines.length > 3){ %>
+                    <li>+<%= workout.routines.length - 3 %> more</li>
+                  <% }%>
+                </ul>
+              <% }else{ %>
+                <p class="meta">No routines logged</p>
+              <%}%>
 
-            <form action="/workouts/<%= workout._id %>?_method=DELETE" method="POST">
-              <button type="submit">Delete</button>
-            </form>
-
-          </li>
-        <% }) %>
-      </ul>
-    <% }else{ %>
-      <p>No workouts yet. Log your first session above.</p>
-    <%}%>
-
+              <div class="card-actions">
+                <a href="/workouts/<%= workout._id %>/edit">Edit</a>
+                <form action="/workouts/<%= workout._id %>?_method=DELETE" method="POST">
+                  <button type="submit">Delete</button>
+                </form>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      <% }else{ %>
+        <p>No workouts yet. Log your first session above.</p>
+      <%}%>
+    </main>
   </body>
 </html>
