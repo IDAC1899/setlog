@@ -2,23 +2,33 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="icon" href="/images/setlog-icon.svg" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
   </head>
   <body>
-    <h1>Create a new account!</h1>
-    <form action="/auth/sign-up" method="POST">
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username" required />
+    <%- include('../partials/_navbar.ejs') %>
 
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" required />
+    <main>
+      <h1>Create a new account!</h1>
 
-      <label for="confirmPassword">Confirm Password:</label>
-      <input type="password" name="confirmPassword" id="confirmPassword" required />
+      <div class="form-card">
+        <form action="/auth/sign-up" method="POST">
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" required />
 
-      <button type="submit">Sign up</button>
-    </form>
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" required />
+
+          <label for="confirmPassword">Confirm Password:</label>
+          <input type="password" name="confirmPassword" id="confirmPassword" required />
+
+          <button type="submit">Sign up</button>
+        </form>
+      </div>
+
+      <p class="form-footer">Already registered? <a href="/auth/sign-in">Sign In</a></p>
+    </main>
   </body>
 </html>
