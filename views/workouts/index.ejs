@@ -21,7 +21,9 @@
             <li class="card">
               <a href="/workouts/<%= workout._id %>"><h3><%= workout.title %></h3></a>
               <p class="meta"><%= workout.date.toDateString() %></p>
-
+              <% if(workout.caloriesBurned){ %>
+                <p class="meta"><%= workout.caloriesBurned %> cal</p>
+              <%}%>
               <% if(workout.routines.length){ %>
                 <ul class="routine-preview">
                   <% workout.routines.slice(0, 3).forEach((routine) => { %>
@@ -36,9 +38,12 @@
               <%}%>
 
               <div class="card-actions">
+                
                 <a href="/workouts/<%= workout._id %>/edit" class="btn-secondary">Edit</a>
-                <form action="/workouts/<%= workout._id %>?_method=DELETE" method="POST">
-                  <button type="submit">Delete</button>
+
+                  <form action="/workouts/<%= workout._id %>?_method=DELETE" method="POST">
+                  <button type="submit" class="btn-danger">Delete</button>
+
                 </form>
               </div>
             </li>

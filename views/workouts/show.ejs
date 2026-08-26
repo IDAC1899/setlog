@@ -15,6 +15,9 @@
         <div>
           <h1><%= workout.title %></h1>
           <p><%= workout.date.toDateString() %></p>
+          <% if(workout.caloriesBurned){ %>
+            <p class="meta"><%= workout.caloriesBurned %> cal (estimated)</p>
+          <%}%>
         </div>
 
         <div class="card-actions">
@@ -24,6 +27,10 @@
           </form>
         </div>
       </div>
+
+      <% if(workout.caloriesBurned){ %>
+        <p class="meta">Estimated using standard MET-based calculation — actual calories burned vary by individual.</p>
+      <%}%>
 
       <h2>Routines</h2>
 
