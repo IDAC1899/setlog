@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const Exercise = require('../models/exercise');
 
 const SALT_ROUDS = 10;
 
@@ -28,6 +29,29 @@ const register = async (req, res) => {
     // else lets check if the password match
     // if password matches create the new user
     const user = await User.create(req.body);
+
+    // give every new user a starting exercise library
+    const starterExercises = [
+      { name: 'Bench Press', muscleGroup: 'Chest' },
+      { name: 'Push-Up', muscleGroup: 'Chest' },
+      { name: 'Squat', muscleGroup: 'Legs' },
+      { name: 'Deadlift', muscleGroup: 'Back' },
+      { name: 'Overhead Press', muscleGroup: 'Shoulders' },
+      { name: 'Pull-Up', muscleGroup: 'Back' },
+      { name: 'Bicep Curl', muscleGroup: 'Arms' },
+      { name: 'Tricep Extension', muscleGroup: 'Arms' },
+      { name: 'Lat Pulldown', muscleGroup: 'Back' },
+      { name: 'Leg Press', muscleGroup: 'Legs' },
+      { name: 'Lunge', muscleGroup: 'Legs' },
+      { name: 'Plank', muscleGroup: 'Core' },
+      { name: 'Bent-Over Row', muscleGroup: 'Back' },
+      { name: 'Lateral Raise', muscleGroup: 'Shoulders' },
+      { name: 'Romanian Deadlift', muscleGroup: 'Legs' },
+    ];
+
+    await Exercise.insertMany(
+      starterExercises.map((exercise) => ({ ...exercise, owner: user._id }))
+    );
 
     req.session.user = {
       username: user.username,
