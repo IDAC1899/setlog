@@ -8,7 +8,7 @@ I built this because I love training, and i always lose track of what i workout 
 
 ## Getting Started
 
-- **Deployed app:** link goes here
+- **Deployed app:** [https://setlog-fl40.onrender.com](https://setlog-fl40.onrender.com)
 - **Planning materials:** [User stories](#user-stories) · [ERD](#erd) · [Wireframes](#wireframes)
 
 ## Planning
