@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/images/setlog-icon.svg" />
-    <title><%= workout.title %></title>
-  </head>
-  <body>
-    <%- include('../partials/_navbar.ejs') %>
+
+<head>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/images/setlog-icon.svg" />
+  <title>
+    <%= workout.title %>
+  </title>
+</head>
+
+<body>
+  <%- include('../partials/_navbar.ejs') %>
 
     <main>
       <div class="workout-header">
         <div>
-          <h1><%= workout.title %></h1>
-          <p><%= workout.date.toDateString() %></p>
+          <h1>
+            <%= workout.title %>
+          </h1>
+          <p>
+            <%= workout.date.toDateString() %>
+          </p>
           <% if(workout.caloriesBurned){ %>
-            <p class="meta"><%= workout.caloriesBurned %> cal (estimated)</p>
-          <%}%>
+            <p class="meta">
+              <%= workout.caloriesBurned %> cal (estimated)
+            </p>
+            <%}%>
         </div>
 
         <div class="card-actions">
@@ -30,84 +40,96 @@
 
       <% if(workout.caloriesBurned){ %>
         <p class="meta">Estimated using standard MET based calculation, actual calories burned vary by individual.</p>
-      <%}%>
+        <%}%>
 
-      <h2>Routines</h2>
+          <h2>Routines</h2>
 
-      <% if(workout.routines.length){ %>
-        <table>
-          <thead>
-            <tr>
-              <th>Exercise</th>
-              <th>Sets</th>
-              <th>Reps</th>
-              <th>Weight</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% workout.routines.forEach((routine) => { %>
-              <tr>
-                <td><%= routine.exercise.name %></td>
-                <td><%= routine.sets %></td>
-                <td><%= routine.reps %></td>
-                <td><%= routine.weight %> kg</td>
-                <td>
-                  <form action="/workouts/<%= workout._id %>/routines/<%= routine._id %>?_method=DELETE" method="POST">
-                    <button type="submit" class="btn-danger">Remove</button>
-                  </form>
-                </td>
-              </tr>
-            <% }) %>
-          </tbody>
-        </table>
-      <% }else{ %>
-        <p>No routines logged yet.</p>
-      <%}%>
+          <% if(workout.routines.length){ %>
+            <table>
+              <thead>
+                <tr>
+                  <th>Exercise</th>
+                  <th>Sets</th>
+                  <th>Reps</th>
+                  <th>Weight</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% workout.routines.forEach((routine)=> { %>
+                  <tr>
+                    <td>
+                      <%= routine.exercise.name %>
+                    </td>
+                    <td>
+                      <%= routine.sets %>
+                    </td>
+                    <td>
+                      <%= routine.reps %>
+                    </td>
+                    <td>
+                      <%= routine.weight %> kg
+                    </td>
+                    <td>
+                      <form action="/workouts/<%= workout._id %>/routines/<%= routine._id %>?_method=DELETE"
+                        method="POST">
+                        <button type="submit" class="btn-danger">Remove</button>
+                      </form>
+                    </td>
+                  </tr>
+                  <% }) %>
+              </tbody>
+            </table>
+            <% }else{ %>
+              <p>No routines logged yet.</p>
+              <%}%>
 
-      <h2>Add a Routine</h2>
+                <h2>Add a Routine</h2>
 
-      <% if(exercises.length){ %>
-        <div class="form-card">
-          <form action="/workouts/<%= workout._id %>/routines" method="POST">
-            <label for="exercise">Exercise:</label>
-            <select name="exercise" id="exercise" required>
-              <% exercises.forEach((exercise) => { %>
-                <option value="<%= exercise._id %>"><%= exercise.name %></option>
-              <% }) %>
-            </select>
+                <% if(exercises.length){ %>
+                  <div class="form-card">
+                    <form action="/workouts/<%= workout._id %>/routines" method="POST">
+                      <label for="exercise">Exercise:</label>
+                      <select name="exercise" id="exercise" required>
+                        <% exercises.forEach((exercise)=> { %>
+                          <option value="<%= exercise._id %>">
+                            <%= exercise.name %>
+                          </option>
+                          <% }) %>
+                      </select>
 
-            <label for="sets">Sets:</label>
-            <input type="number" name="sets" id="sets" min="1" required />
+                      <label for="sets">Sets:</label>
+                      <input type="number" name="sets" id="sets" min="1" required />
 
-            <label for="reps">Reps:</label>
-            <input type="number" name="reps" id="reps" min="1" required />
+                      <label for="reps">Reps:</label>
+                      <input type="number" name="reps" id="reps" min="1" required />
 
-            <label for="weight">Weight (kg):</label>
-            <input type="number" name="weight" id="weight" min="0" step="0.5" required />
+                      <label for="weight">Weight (kg):</label>
+                      <input type="number" name="weight" id="weight" min="0" step="0.5" required />
 
-            <button type="submit">Add Routine</button>
-          </form>
-        </div>
-          
-      <% }else{ %>
-        <p>You have no exercises yet. Add one below, or <a href="/exercises">manage your full list</a>.</p>
+                      <button type="submit">Add Routine</button>
+                    </form>
+                  </div>
 
-        <div class="form-card">
-          <form action="/exercises" method="POST">
-            <label for="quickName">Exercise name:</label>
-            <input type="text" name="name" id="quickName" required />
+                  <% }else{ %>
+                    <p>You have no exercises yet. Add one below, or <a href="/exercises">manage your full list</a>.</p>
 
-            <label for="quickMuscleGroup">Muscle group:</label>
-            <input type="text" name="muscleGroup" id="quickMuscleGroup" />
+                    <div class="form-card">
+                      <form action="/exercises" method="POST">
+                        <label for="quickName">Exercise name:</label>
+                        <input type="text" name="name" id="quickName" required />
 
-            <button type="submit">Add Exercise</button>
-          </form>
-        </div>
-      <%}%>
+                        <label for="quickMuscleGroup">Muscle group:</label>
+                        <input type="text" name="muscleGroup" id="quickMuscleGroup" />
 
-      <p class="form-footer"><a href="/workouts">Back to my workouts</a></p>
+                        <button type="submit">Add Exercise</button>
+                      </form>
+                    </div>
+                    <%}%>
+
+                      <p class="form-footer"><a href="/workouts">Back to my workouts</a></p>
     </main>
     <script src="/scripts/loading.js"></script>
-  </body>
+</body>
+
 </html>

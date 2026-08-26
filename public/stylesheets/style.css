@@ -281,3 +281,29 @@ form {
 .form-card button[type="submit"] {
   align-self: center;
 }
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--border);
+}
+
+.icon-btn:hover {
+  background: #b91c1c;
+  border-color: #b91c1c;
+}
+
+.icon-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: #f87171;
+}
+
+.icon-btn:hover svg {
+  stroke: var(--text);
+}
