@@ -13,9 +13,20 @@
     <main>
       <% if(user){ %>
         <h1>Welcome back, <%= user.username %>!</h1>
+        <p><%= workoutCount %> workout<%= workoutCount === 1 ? '' : 's' %> logged so far.</p>
+
+        <div class="card-actions">
+          <a href="/workouts/new" class="btn-secondary">+ Log a Workout</a>
+          <a href="/workouts" class="btn-secondary">View My Workouts</a>
+        </div>
       <% }else{ %>
         <h1>Welcome to SetLog</h1>
         <p>Log your lifts. Know what to beat.</p>
+
+        <div class="card-actions">
+          <a href="/auth/sign-up" class="btn-secondary">Sign Up</a>
+          <a href="/auth/sign-in" class="btn-secondary">Sign In</a>
+        </div>
       <%}%>
     </main>
     <script src="/scripts/loading.js"></script>
