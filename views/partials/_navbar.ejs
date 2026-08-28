@@ -1,14 +1,16 @@
 <nav>
-  <link rel="stylesheet" href="/stylesheets/style.css" />
-  <a href="/"><img src="/images/setlog-lockup.svg" alt="SetLog" height="32" /></a>
+  <a href="/" class="brand">
+    <img src="/images/setlog-lockup.svg" alt="SetLog" height="32" />
+  </a>
+
   <div class="nav-links">
-  <% if(user) { %>
-  <a href="/workouts">My Workouts</a>
-  <a href="/exercises">Exercises</a>
-  <a href="/auth/sign-out">Sign Out</a>
-  <% } else { %>
-  <a href="/auth/sign-in">Sign In</a>
-  <a href="/auth/sign-up">Sign Up</a>
-  <% } %>
+    <% if(user) { %>
+      <a href="/workouts">My Workouts</a>
+      <a href="/exercises">Exercises</a>
+      <a href="/auth/sign-out">Sign Out</a>
+    <% } else { %>
+      <a href="/auth/sign-in">Sign In</a>
+      <a href="/auth/sign-up">Sign Up</a>
+    <% } %>
   </div>
 </nav>

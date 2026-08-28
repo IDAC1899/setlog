@@ -10,19 +10,23 @@
   <body>
     <%- include('../partials/_navbar.ejs') %>
 
-    <h1>Exercises</h1>
+    <main>
+      <h1>Exercises</h1>
+      <p class="meta">Build your exercise library, then log workouts against it.</p>
 
-    <form action="/exercises" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" name="name" id="name" required />
+      <div class="form-card">
+        <form action="/exercises" method="POST">
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" required />
 
-      <label for="muscleGroup">Muscle group:</label>
-      <input type="text" name="muscleGroup" id="muscleGroup" />
+          <label for="muscleGroup">Muscle group:</label>
+          <input type="text" name="muscleGroup" id="muscleGroup" />
 
-      <button type="submit">Add Exercise</button>
-    </form>
+          <button type="submit">Add Exercise</button>
+        </form>
+      </div>
 
-          <% if(exercises.length){ %>
+      <% if(exercises.length){ %>
         <div class="exercise-list">
           <% exercises.forEach((exercise) => { %>
             <div class="exercise-row">
@@ -40,9 +44,10 @@
           <% }) %>
         </div>
       <% }else{ %>
-        <p>No exercises yet. Add your first one above.</p>
+        <p class="empty">No exercises yet. Add your first one above.</p>
       <%}%>
+    </main>
 
+    <script src="/scripts/loading.js"></script>
   </body>
-  <script src="/scripts/loading.js"></script>
 </html>
